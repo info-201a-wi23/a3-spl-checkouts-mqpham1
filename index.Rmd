@@ -2,85 +2,41 @@
 title: "A3: SPL Library Checkouts"
 output: html_document
 ---
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+```
 ### Introduction
 
-An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
+Here I am doing an analysis on the checkout trends at the Seattle Public Libraries. This aims to better understand the checkout patterns that users have for the library. The dataset comes from the Seattle Public Library. It includes both physical and electronic checkouts that have come from their recorded database. The parameters of the dataset include various fields such as CheckoutTyper, Material Type, CheckoutYear, CheckoutMonth, Title, Creator, and Subjects. I am using a smaller dataset that only includes data from 2017-2023 and items that have been checked out at least 10 times a month. This data is collected to allow both the public and the agency to monitor what is being checked out and to help them better the selection of items for its users. The checkout data doesn't include any information on who checked out the item and so it doens't impact people personally. Some of the issues with this dataset come from its messiness and non-uniformity for the recorded data like publishing date.
+```{r summary info, echo=FALSE, message=FALSE}
+source("summary.R")
+```
 
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
+Looking at the summary statistics of the dataset that I am working with, I found that the maximum number of checkouts in a given month was `r month_checkouts` (January). January might be a popular time for people to checkout items at Seattle Public Library as people make resolutions to read more. The month of January had a total number of `r max_month_checkouts`. In addition, I looked into which title was checked out the most and the title of this item is called *`r title_checkout`*. It was checked out a total of `r max_checkout` times during this time period. Knowing this helps to give Seattle Public Library an idea of the popular titles and trying to have an adequate number to be checked out if needed. Furthermore, as other forms of media are increasingly being used, I wanted to see how many audiobooks were checked out during this time. The number came out to be `r total_audio`. Overall, these varibales give a general overview of how users checkout at the Seattle Public Library and what they are interested in.
 
-These will likely be calculated using your DPLYR skills, answering questions such as:
+### Checkout By Material Over Time
 
-- What is the average number of checkouts for each item?
-- What is the month or year with the most/least checkouts for a book that you're interested in?
-- What is the month or year with the most/least checkouts for ebooks?
-- How has the number of print book checkouts changed over time?
-
-Feel free to calculate and report values that you find relevant.
-
-### The Dataset
-
-- Who collected/published the data?  
-- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?
-- How was the data collected or generated?  
-- Why was the data collected?  
-- What, if any, ethical questions do you need to consider when working with this data?  
-- What are possible limitations or problems with this data?   (at least 200 words)
-
-
-### First Trends Over Time Chart
-
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
-
-The first chart that you will create and include will show the trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
+``````{r, echo = FALSE, code = readLines("chart1.R")}
 ```
 
-### Second Trends Over Time Chart
+From this line graph, we can see that from 2017 until about 2019, books were the majority of items being checked out at the library for items checked out more than 10 times in a month. From then on, audio books and ebooks began to rise in numbers. This might be due to COVID-19 chnaging the way we interact with the library. Slowly, books have started to rise in numbers as libraries began to open up to the public again.
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+### Checkout of Haruki Murakami Books Over Time
 
-The second chart that you will create and include will show another trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+``````{r, echo = FALSE, code = readLines("chart2.R")}
 ```
 
-### Your Choice
+For this graph, I decided to look into the checkout patterns of books by Haruki Murakami. I enjoy the work from the author and wanted to know how users at Seattle Public Libaries were checking out his books. He has many books so I stuck with books that had been checked out at least 50 times in a given year. This made the graph more readable with less varibales to take into account. Here, *1Q84* is his most popular book to be checked out at Seattle Public Library. Over time, it has gradually went down numbers. *Killing Commendatore: A novel* also had a high number of checkouts and decreased after about 2019.
 
-The last chart is up to you. It could be a line plot, scatter plot, histogram, bar plot, stacked bar plot, and more. Here are some requirements to help guide your design:
+### Month of Highest Checkouts
 
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+``````{r, echo = FALSE, code = readLines("chart3.R")}
 ```
 
-
+This bar chart looks at the total number of checkouts each month from the years 2017-2022. From this, it can be seen that January has the highest number of checkouts. This may be due to people wanting to read more from New Year's resolutions. The next highest happenes in August and this might be from students heading back to school and needing certain books for their education.
